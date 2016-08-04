@@ -16,5 +16,5 @@ public interface Define {
 	GSvector2 BASE_SIZE = new GSvector2( 50, 50 );
 	GSvector2 BASE_RESIZE = new GSvector2( 256, 256 );
 	enum BASE_FORCE{ NONE, PLAYER, ENEMY }
-	enum BASE_TYPE{ BASE, ENERGY, ATTACK }
+	enum BASE_TYPE{ BASE, ENERGY, ATTACK, GUARD }
 }
