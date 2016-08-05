@@ -20,7 +20,7 @@ public class Application extends JFrame implements MouseListener,MouseMotionList
 	 */
 	private static final long serialVersionUID = 6296962141376967263L;
 
-	private Container c;
+	private static Container c;
 	public static ObjectManager mObj;		// オブジェクト管理者
 	public static int mID;								// プレイヤーID
 
@@ -73,6 +73,9 @@ public class Application extends JFrame implements MouseListener,MouseMotionList
 		// アプリケーションを生成
 		Application net = new Application();
 
+		// 初期化
+		mObj.getCM().initialize(net, c);
+
 		// 画面表示
 		net.setVisible(true);
 
@@ -86,7 +89,8 @@ public class Application extends JFrame implements MouseListener,MouseMotionList
 		JButton theButton = (JButton)e.getComponent();//クリックしたオブジェクトを得る．型が違うのでキャストする
 		String theArrayIndex = theButton.getActionCommand();//ボタンの配列の番号を取り出す
 
-		mObj.test( Integer.parseInt( theArrayIndex ) );
+		//mObj.getCM().test( Integer.parseInt(theArrayIndex) );
+		mObj.getCM().changeForce(  Integer.parseInt(theArrayIndex) );
 
 		Icon theIcon = theButton.getIcon();//theIconには，現在のボタンに設定されたアイコンが入る
 		System.out.println(theIcon);//デバッグ（確認用）に，クリックしたアイコンの名前を出力する

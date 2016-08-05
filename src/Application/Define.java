@@ -10,11 +10,9 @@ public interface Define {
 	int TYPE_ENEMY = 2;
 
 	// ベース関連
-	int BASE_FIRST_X = 100;
-	int BASE_PLAYER_Y = 400;
-	int BASE_ENEMY_Y = 50;
-	GSvector2 BASE_SIZE = new GSvector2( 50, 50 );
-	GSvector2 BASE_RESIZE = new GSvector2( 256, 256 );
+	int BASE_SIZE = 50;
+	int BASE_RESIZE = 128;
 	enum BASE_FORCE{ NONE, PLAYER, ENEMY }
 	enum BASE_TYPE{ BASE, ENERGY, ATTACK, GUARD }
+	String FILE_NAME[] = { "base", "energy", "attack", "guard" };
 }
