@@ -1,30 +1,33 @@
 package Object.Character;
 
-import java.awt.Container;
 import java.util.ArrayList;
 import java.util.List;
 
 import Application.Application;
 import Application.Define;
+import Application.Panel;
 
 public class CharacterManager {
 
 	private List<CharacterBase> mBaseList;
+	private double mEnergy;
 
 	// コンストラクタ
-	public CharacterManager( Application app, Container c ){
+	public CharacterManager( Application app, Panel p ){
 
 		// リストを生成
 		mBaseList = new ArrayList<CharacterBase>();
+
+		mEnergy = 0;
 	}
 
 	// 初期化
-	public void initialize( Application app, Container c ){
+	public void initialize( Application app, Panel p ){
 
 		// ベースがなければ作成
 		if( mBaseList.size() == 0 ){
 			// ベース作成
-			BasePosReader.readBasePos( app, c );
+			BasePosReader.readBasePos( app, p );
 		}
 	}
 
@@ -50,7 +53,7 @@ public class CharacterManager {
 
 		if( b.getForce() == Define.BASE_FORCE.NONE.ordinal() ){
 
-			b.changeForce( 1 );
+			b.changeForce( id );
 			return;
 		}
 
@@ -59,6 +62,9 @@ public class CharacterManager {
 
 	// リストに追加
 	public void addBaseList( CharacterBase b ){ mBaseList.add( b ); }
+
+	// エネルギー加算
+	public void addEnergy(){ mEnergy += Define.ENERGY_ADD; }
 
 	// ゲッター
 	public List<CharacterBase> getList(){ return mBaseList; }

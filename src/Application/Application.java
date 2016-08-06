@@ -1,5 +1,4 @@
 package Application;
-import java.awt.Container;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -7,7 +6,6 @@ import java.io.IOException;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
-import javax.swing.Icon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -20,7 +18,7 @@ public class Application extends JFrame implements MouseListener,MouseMotionList
 	 */
 	private static final long serialVersionUID = 6296962141376967263L;
 
-	private static Container c;
+	private static Panel mPanel;
 	public static ObjectManager mObj;		// オブジェクト管理者
 	public static int mID;								// プレイヤーID
 
@@ -32,19 +30,16 @@ public class Application extends JFrame implements MouseListener,MouseMotionList
 		//入力がないときは，"localhost"とする
 		if(ipAddress.equals("") ){ ipAddress = "localhost"; }
 
+		mPanel = new Panel( this );
+		this.add(mPanel);
+
 		//ウィンドウを作成する
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setTitle("MyClient");
 		setSize( (int)Define.WINDOW_SIZE.x, (int)Define.WINDOW_SIZE.y );
 
-		//フレームのペインを取得する
-		c = getContentPane();
-
-		//自動レイアウトの設定を行わない
-		c.setLayout(null);
-
 		// オブジェクト管理者生成
-		mObj = new ObjectManager( this, c );
+		mObj = new ObjectManager( this, mPanel );
 
 		// IDの初期化
 		mID = 0;
@@ -74,33 +69,36 @@ public class Application extends JFrame implements MouseListener,MouseMotionList
 		Application net = new Application();
 
 		// 初期化
-		mObj.getCM().initialize(net, c);
+		mObj.getCM().initialize(net, mPanel);
 
 		// 画面表示
 		net.setVisible(true);
 
+		mID = 1;
+
 		while( true ){
 			mObj.update();
+
+			net.repaint();
 		}
 	}
 
 	//ボタンをクリックしたときの処理
 	public void mouseClicked(MouseEvent e) {
-		JButton theButton = (JButton)e.getComponent();//クリックしたオブジェクトを得る．型が違うのでキャストする
-		String theArrayIndex = theButton.getActionCommand();//ボタンの配列の番号を取り出す
-
-		//mObj.getCM().test( Integer.parseInt(theArrayIndex) );
-		mObj.getCM().changeForce(  Integer.parseInt(theArrayIndex) );
-
-		Icon theIcon = theButton.getIcon();//theIconには，現在のボタンに設定されたアイコンが入る
-		System.out.println(theIcon);//デバッグ（確認用）に，クリックしたアイコンの名前を出力する
-
-//				if(theIcon == whiteIcon){//アイコンがwhiteIconと同じなら
-//					theButton.setIcon(blackIcon);//blackIconに設定する
-//				}else{
-//					theButton.setIcon(whiteIcon);//whiteIconに設定する
-//				}
-		repaint();//画面のオブジェクトを描画し直す
+//		JButton theButton = (JButton)e.getComponent();//クリックしたオブジェクトを得る．型が違うのでキャストする
+//		String theArrayIndex = theButton.getActionCommand();//ボタンの配列の番号を取り出す
+//
+//		mObj.getCM().changeForce(  Integer.parseInt(theArrayIndex) );
+//
+//		Icon theIcon = theButton.getIcon();//theIconには，現在のボタンに設定されたアイコンが入る
+//		//System.out.println(theIcon);//デバッグ（確認用）に，クリックしたアイコンの名前を出力する
+//
+////				if(theIcon == whiteIcon){//アイコンがwhiteIconと同じなら
+////					theButton.setIcon(blackIcon);//blackIconに設定する
+////				}else{
+////					theButton.setIcon(whiteIcon);//whiteIconに設定する
+////				}
+//		repaint();//画面のオブジェクトを描画し直す
 	}
 
 	//マウスがオブジェクトに入ったときの処理
@@ -110,11 +108,18 @@ public class Application extends JFrame implements MouseListener,MouseMotionList
 	public void mouseExited(MouseEvent e) {}
 
 	public void mousePressed(MouseEvent e) {//マウスでオブジェクトを押したときの処理（クリックとの違いに注意）
-		System.out.println("マウスを押した");
+		//System.out.println("マウスを押した");
 	}
 
 	public void mouseReleased(MouseEvent e) {//マウスで押していたオブジェクトを離したときの処理
-		System.out.println("マウスを放した");
+		//System.out.println("マウスを放した");
+
+		JButton theButton = (JButton)e.getComponent();//クリックしたオブジェクトを得る．型が違うのでキャストする
+		String theArrayIndex = theButton.getActionCommand();//ボタンの配列の番号を取り出す
+
+		mObj.getCM().changeForce(  Integer.parseInt(theArrayIndex) );
+
+		repaint();//画面のオブジェクトを描画し直す
 	}
 
 	//マウスでオブジェクトとをドラッグしているときの処理

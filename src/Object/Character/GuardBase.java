@@ -1,15 +1,14 @@
 package Object.Character;
 
-import java.awt.Container;
-
 import Application.Application;
 import Application.Define;
 import Application.GSvector2;
+import Application.Panel;
 
 public class GuardBase extends CharacterBase{
 
-	public GuardBase( Application app, Container c, GSvector2 pos, int number, int type ) {
-		super( app, c, pos, number, type );
+	public GuardBase( Application app, Panel p, GSvector2 pos, int number, int type ) {
+		super( app, p, pos, number, type );
 
 	}
 
@@ -20,6 +19,6 @@ public class GuardBase extends CharacterBase{
 
 		if( mForce == Define.BASE_FORCE.NONE.ordinal() ) return;
 
-		
+
 	}
 }

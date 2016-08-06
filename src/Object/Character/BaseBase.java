@@ -5,9 +5,9 @@ import Application.Define;
 import Application.GSvector2;
 import Application.Panel;
 
-public class AttackBase extends CharacterBase{
+public class BaseBase extends CharacterBase{
 
-	public AttackBase( Application app, Panel p, GSvector2 pos, int number, int type ) {
+	public BaseBase( Application app, Panel p, GSvector2 pos, int number, int type ) {
 		super( app, p, pos, number, type );
 
 	}

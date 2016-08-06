@@ -1,6 +1,5 @@
 package Object.Character;
 
-import java.awt.Container;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -9,11 +8,12 @@ import java.io.FileReader;
 import Application.Application;
 import Application.Define;
 import Application.GSvector2;
+import Application.Panel;
 
 public class BasePosReader {
 
 	// 読み込み
-	public static void readBasePos( Application app, Container c ){
+	public static void readBasePos( Application app, Panel p ){
 
 		BufferedReader br = null;
 		String str = "";
@@ -54,15 +54,15 @@ public class BasePosReader {
 					// 空白は無視
 					if( item[i].equals("") ) continue;
 
-					GSvector2 pos = new GSvector2( ( i - 1 ) * 20, posY );
+					GSvector2 pos = new GSvector2( ( i - 1 ) * Define.BASE_POS_DISTANCE, posY );
 
-					createBase( app, c, pos, number, Integer.parseInt(item[i]) );
+					createBase( app, p, pos, number, Integer.parseInt(item[i]) );
 
 					number++;
 				}
 
 				str = br.readLine();
-				posY += 20;
+				posY += Define.BASE_POS_DISTANCE;
 
 			}catch( Exception e ){
 
@@ -73,23 +73,27 @@ public class BasePosReader {
 	}
 
 	// ベース作成
-	private static void createBase( Application app, Container c, GSvector2 pos, int number, int type ){
+	private static void createBase( Application app, Panel p, GSvector2 pos, int number, int type ){
 
 		CharacterBase b = null;
 
-		if( type == Define.BASE_TYPE.BASE.ordinal() ){}
+		if( type == Define.BASE_TYPE.BASE.ordinal() ){
+			b = new BaseBase( app, p, pos, number, type );
+		}
 
 		if( type == Define.BASE_TYPE.ATTACK.ordinal() ){
-			b = new AttackBase( app, c, pos, number, type );
+			b = new AttackBase( app, p, pos, number, type );
 		}
 
 		if( type == Define.BASE_TYPE.ENERGY.ordinal() ){
-			b = new EnergyBase( app, c, pos, number, type );
+			b = new EnergyBase( app, p, pos, number, type );
 		}
 
 		if( type == Define.BASE_TYPE.GUARD.ordinal() ){
-			b = new GuardBase( app, c, pos, number, type );
+			b = new GuardBase( app, p, pos, number, type );
 		}
+
+		if( b == null ) System.out.println("null");
 
 		Application.getObj().getCM().addBaseList( b );
 	}

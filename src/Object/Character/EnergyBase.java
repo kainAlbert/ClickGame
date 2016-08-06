@@ -1,15 +1,13 @@
 package Object.Character;
 
-import java.awt.Container;
-
 import Application.Application;
-import Application.Define;
 import Application.GSvector2;
+import Application.Panel;
 
 public class EnergyBase extends CharacterBase{
 
-	public EnergyBase( Application app, Container c, GSvector2 pos, int number, int type ) {
-		super( app, c, pos, number, type );
+	public EnergyBase( Application app, Panel p, GSvector2 pos, int number, int type ) {
+		super( app, p, pos, number, type );
 
 	}
 
@@ -18,8 +16,8 @@ public class EnergyBase extends CharacterBase{
 
 		super.update();
 
-		if( mForce == Define.BASE_FORCE.NONE.ordinal() ) return;
+		if( mForce != Application.getID() ) return;
 
-		
+		Application.getObj().getCM().addEnergy();
 	}
 }

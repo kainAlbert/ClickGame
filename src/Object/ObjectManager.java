@@ -1,8 +1,7 @@
 package Object;
 
-import java.awt.Container;
-
 import Application.Application;
+import Application.Panel;
 import Object.Character.CharacterManager;
 
 public class ObjectManager {
@@ -10,9 +9,9 @@ public class ObjectManager {
 	private CharacterManager mCM;
 
 	// コンストラクタ
-	public ObjectManager( Application app, Container c ){
+	public ObjectManager( Application app, Panel p ){
 
-		mCM = new CharacterManager( app, c );
+		mCM = new CharacterManager( app, p );
 	}
 
 	// 更新

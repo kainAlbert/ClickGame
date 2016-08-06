@@ -1,6 +1,5 @@
 package Object.Character;
 
-import java.awt.Container;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -13,6 +12,7 @@ import javax.swing.JButton;
 import Application.Application;
 import Application.Define;
 import Application.GSvector2;
+import Application.Panel;
 
 public class CharacterBase {
 
@@ -26,7 +26,7 @@ public class CharacterBase {
 	protected int mForce;
 
 	// コンストラクタ
-	public CharacterBase( Application app, Container c, GSvector2 pos, int number, int type ){
+	public CharacterBase( Application app, Panel p, GSvector2 pos, int number, int type ){
 
 		// 画像読み込み
 		try{
@@ -50,7 +50,7 @@ public class CharacterBase {
 		setImage();
 
 		//ペインに貼り付ける
-		c.add( mButton );
+		p.add( mButton );
 
 		//ボタンの大きさと位置を設定する．(x座標，y座標, xの幅,yの幅）
 		mButton.setBounds( (int)pos.x, (int)pos.y, (int)mSize.x, (int)mSize.y );
