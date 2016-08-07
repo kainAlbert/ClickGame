@@ -110,6 +110,8 @@ public class CharacterBase {
 			return;
 		}
 
+		if( mPos.y < 0 ) changeForce( Define.BASE_FORCE.NONE.ordinal() );
+
 		if( mPos.y < mLastPos.y ) mPos.y += Define.BASE_SPEED;
 
 		// 現在の位置をボタンに割り当てる
