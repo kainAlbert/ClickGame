@@ -50,6 +50,8 @@ public class Collision {
 	// 弾とガードの当たり判定
 	public void collisionBulletGuard( CharacterBase base, List<CharacterBase> bList ){
 
+		if( base == null || bList == null ) return;
+
 		for( int i=0; i<bList.size(); i++ ){
 
 			CharacterBase b = bList.get(i);

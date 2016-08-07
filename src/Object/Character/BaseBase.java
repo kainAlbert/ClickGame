@@ -64,8 +64,6 @@ public class BaseBase extends CharacterBase{
 	// 衝突
 	public void collision(){
 
-		if( mForce != Application.getID() ) return;
-
-		Application.getObj().getCM().damage(1);
+		Application.getObj().getCM().damage( 1, mForce );
 	}
 }

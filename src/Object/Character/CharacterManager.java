@@ -14,7 +14,7 @@ public class CharacterManager {
 	private List<CharacterBase> mPlayerBulletList;
 	private List<CharacterBase> mEnemyBulletList;
 	private double mEnergy;
-	private int mHP;
+	private int[] mHP;
 
 	// コンストラクタ
 	public CharacterManager( Application app, Panel p ){
@@ -25,7 +25,12 @@ public class CharacterManager {
 		mEnemyBulletList = new ArrayList<CharacterBase>();
 
 		mEnergy = 0;
-		mHP = Define.BASE_INIT_HP;
+		mHP = new int[3];
+
+		for( int i=0; i<mHP.length; i++ ){
+
+			mHP[i] = Define.BASE_INIT_HP;
+		}
 	}
 
 	// 初期化
@@ -47,7 +52,7 @@ public class CharacterManager {
 		updateList(mEnemyBulletList);
 
 		// 負け処理
-		if( mHP > 0 || Application.getObj().getIsEnd() ) return;
+		if( mHP[ Application.getID() ] > 0 || Application.getObj().getIsEnd() ) return;
 
 		Application.getObj().isLose();
 
@@ -120,12 +125,12 @@ public class CharacterManager {
 	public void addEnergy( double e ){ mEnergy += e; }
 
 	// ダメージ
-	public void damage( int damage ){ mHP -= damage; }
+	public void damage( int damage, int force ){ mHP[ force ] -= damage; }
 
 	// ゲッター
 	public List<CharacterBase> getBaseList(){ return mBaseList; }
 	public List<CharacterBase> getPlayerBulletList(){ return mPlayerBulletList; }
 	public List<CharacterBase> getEnemyBulletList(){ return mEnemyBulletList; }
 	public double getEnergy(){ return mEnergy; }
-	public int getHP(){ return mHP; }
+	public int getHP( int force ){ return mHP[ force ]; }
 }

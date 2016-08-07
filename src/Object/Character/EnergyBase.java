@@ -21,6 +21,8 @@ public class EnergyBase extends CharacterBase{
 
 		if( mForce != Application.getID() ) return;
 
+		if( Application.getObj().getCM().getEnergy() >= Define.MAX_ENERGY ) return;
+
 		Application.getObj().getCM().addEnergy( Define.ENERGY_ADD );
 	}
 }

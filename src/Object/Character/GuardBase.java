@@ -59,7 +59,7 @@ public class GuardBase extends CharacterBase{
 	// ガードを展開
 	public void guard( double energy ){
 
-		GSvector2 pos = new GSvector2( mPos.x + mSize.x / 2 - Define.GUARD_DISTANCE / 2, mPos.y + mSize.y / 2 - Define.GUARD_DISTANCE / 2 );
+		GSvector2 pos = new GSvector2( mPos.x + mSize.x / 2 - Define.GUARD_DISTANCE, mPos.y + mSize.y / 2 - Define.GUARD_DISTANCE );
 
 		((GuardDistanceEffect)mEffect).update( energy, pos, mForce );
 

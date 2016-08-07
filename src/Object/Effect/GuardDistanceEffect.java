@@ -12,7 +12,7 @@ public class GuardDistanceEffect extends CharacterBase{
 
 		super( null, null, "guardDistance", new GSvector2(), 0, 0 );
 
-		mSize = new GSvector2( Define.GUARD_DISTANCE, Define.GUARD_DISTANCE );
+		mSize = new GSvector2( Define.GUARD_DISTANCE * 2, Define.GUARD_DISTANCE * 2 );
 		mReSize = new GSvector2( Define.BASE_RESIZE, Define.BASE_RESIZE );
 		mFirstReSize = new GSvector2( Define.BASE_RESIZE, Define.BASE_RESIZE );
 
@@ -36,6 +36,6 @@ public class GuardDistanceEffect extends CharacterBase{
 
 		if( energy < Define.GUARD_ENERGY ) return;
 
-		mSize.x = Define.GUARD_DISTANCE;
+		mSize.x = Define.GUARD_DISTANCE * 2;
 	}
 }
