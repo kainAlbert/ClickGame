@@ -18,7 +18,6 @@ public class BasePosReader {
 		BufferedReader br = null;
 		String str = "";
 		String[] item = null;
-		int posY = 0;
 		int number = 0;
 
 		try{
@@ -42,27 +41,15 @@ public class BasePosReader {
 
 				item = str.split("\t");
 
-				// 先頭の要素が-1なら終了
-				if( item[0].equals("-1") ) break;
-
-				// 1列目は無視するのでi=1から最後まで
-				for( int i=1; i<item.length; i++ ){
-
-					// -1なら終了
-					if( item[i].equals( "-1" ) ) break;
-
-					// 空白は無視
-					if( item[i].equals("") ) continue;
-
-					GSvector2 pos = new GSvector2( ( i - 1 ) * Define.BASE_POS_DISTANCE, posY );
-
-					createBase( app, p, pos, number, Integer.parseInt(item[i]) );
-
-					number++;
-				}
+				createBase(
+						app, p,
+						new GSvector2( Integer.parseInt(item[0]), Integer.parseInt(item[1]) ),
+						number,
+						Integer.parseInt(item[2])
+					);
 
 				str = br.readLine();
-				posY += Define.BASE_POS_DISTANCE;
+				number++;
 
 			}catch( Exception e ){
 
@@ -81,19 +68,17 @@ public class BasePosReader {
 			b = new BaseBase( app, p, pos, number, type );
 		}
 
-		if( type == Define.BASE_TYPE.ATTACK.ordinal() ){
-			b = new AttackBase( app, p, pos, number, type );
-		}
-
 		if( type == Define.BASE_TYPE.ENERGY.ordinal() ){
 			b = new EnergyBase( app, p, pos, number, type );
+		}
+
+		if( type == Define.BASE_TYPE.ATTACK.ordinal() ){
+			b = new AttackBase( app, p, pos, number, type );
 		}
 
 		if( type == Define.BASE_TYPE.GUARD.ordinal() ){
 			b = new GuardBase( app, p, pos, number, type );
 		}
-
-		if( b == null ) System.out.println("null");
 
 		Application.getObj().getCM().addBaseList( b );
 	}
